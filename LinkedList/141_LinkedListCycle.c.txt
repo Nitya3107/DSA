@@ -1,0 +1,30 @@
+/*
+	LeetCode 141- Linked List Cycle
+	Approach- Floyd Cycle Detection
+	Time Complexity- O(n)
+	Space Complexity- O(1)
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) {
+    struct ListNode *fast=head;
+    struct ListNode *slow=head;
+
+    while(fast!=NULL && fast->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next;
+
+        if(fast==slow){
+            return true;
+        }
+        
+    }
+    return false;
+    
+}
