@@ -1,0 +1,50 @@
+/*LeetCode 143- Reorder List
+	Approach- 
+		1.Find middle element using slow and fast pointers
+		2.Make two lists
+		3.Merge the two lists by taking the second list in reversed order
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+void reorderList(struct ListNode* head) {
+    struct ListNode *fast=head;
+    struct ListNode *slow=head;
+    struct ListNode *A=head;
+    struct ListNode *B;
+    struct ListNode *headB;
+
+   
+    while(fast->next!=NULL && fast->next->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+
+    headB=B=slow->next;
+    slow->next=NULL;
+
+    while(B!=NULL && B->next!=NULL){
+       while(B->next->next!=NULL){
+        B=B->next;
+       }
+
+   
+        B->next->next=A->next;
+        A->next=B->next;
+        B->next=NULL;
+        B=headB;
+        A=A->next->next;
+    }
+    
+
+    if(B!=NULL && B->next==NULL){
+        B->next=A->next;
+        A->next=B;
+    }
+
+}
